@@ -84,15 +84,74 @@ Abaixo, você encontrará uma explicação sobre cada um dos métodos, o que cad
 
 ---
 ## 📈 Avaliação de Desempenho dos Modelos
-> Após o treinamento, os modelos são avaliados por meio de três métricas principais:
 
-🎯 Recompensa Média por Episódio: Avalia o desempenho geral do agente.
+Após o treinamento, os modelos são avaliados com base em **métricas quantitativas e visuais**, permitindo uma comparação aprofundada entre os algoritmos.
 
-⏱️ Número de Episódios até a Convergência: Mede o tempo (estimado) para atingir um desempenho estável.
+### 🔢 Métricas Quantitativas
 
-📉 Estabilidade do Desempenho: Calculada pelo desvio padrão e coeficiente de variação das recompensas.
+- 🎯 **Recompensa Média por Episódio**  
+  Avalia o desempenho geral do agente durante os episódios de teste.
 
-Para isso, utilize o script **`comparador.py`**
+- 📉 **Estabilidade do Desempenho**  
+  Calculada pelo **desvio padrão** e pelo **coeficiente de variação** das recompensas. Um valor menor indica um comportamento mais consistente.
+
+- ⏱️ **Número de Episódios até a Convergência**  
+  Mede aproximadamente quantos episódios foram necessários até o agente atingir um desempenho consistente (ex: média ≥ 200 em uma janela de 10 episódios).
+
+- ⚙️ **Tempo de Processamento**  
+  Mede quanto tempo levou para avaliar o modelo completo (útil para comparar eficiência computacional).
+
+> Para calcular e visualizar essas métricas, utilize o script:
+**`python comparador.py`**
+
+---
+
+### 📊 **Visualizações com Matplotlib**
+
+O script comparador.py também gera gráficos usando a biblioteca matplotlib, que ajudam a interpretar os resultados de forma visual:
+
+---
+
+1️⃣ **Gráfico de Barras: Recompensa Média com Desvio Padrão**  
+Mostra a média de recompensas por algoritmo.  
+As barras de erro indicam o desvio padrão.  
+Ideal para comparar desempenho médio e consistência.
+
+```python
+plt.bar(labels, media, yerr=desvio, capsize=8, color=colors)
+plt.title("Recompensa Média por Algoritmo (± Desvio Padrão)")
+```
+
+---
+
+2️⃣ **Gráfico de Barras: Tempo de Execução**  
+Mostra o tempo total de execução da avaliação para cada modelo.  
+Útil para comparar a eficiência computacional entre algoritmos.
+
+```python
+plt.bar(labels, tempo_execucao, color=colors)
+plt.title("Tempo de Avaliação dos Modelos")
+```
+
+---
+
+3️⃣ **Boxplot: Distribuição das Recompensas**  
+Exibe a distribuição das recompensas por episódio.  
+Permite ver outliers, mediana e dispersão.  
+Útil para avaliar estabilidade e robustez dos modelos.
+
+```python
+plt.boxplot([dqn_rewards, ppo_rewards, a2c_rewards], labels=labels, patch_artist=True)
+plt.title("Distribuição das Recompensas por Episódio")
+```
+
+---
+
+🎨 **Estilo e Organização**  
+Usa `plt.style.use('ggplot')` para um visual moderno e claro.  
+`plt.tight_layout()` é usado para evitar sobreposição de elementos.  
+As cores e títulos são personalizados para clareza.
+
 ---
 ## ⚙️ Como Rodar os Códigos
 
