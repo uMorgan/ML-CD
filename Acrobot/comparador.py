@@ -1,23 +1,23 @@
 import os
-import gymnasium as gym
+import gym
 import time
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from stable_baselines3 import DQN, A2C, PPO
 from stable_baselines3.common.vec_env import DummyVecEnv
-from gymnasium.wrappers import RecordEpisodeStatistics
+from gym.wrappers import RecordEpisodeStatistics as Monitor
 
-ENV_ID = "CartPole-v1"
+ENV_ID = "Acrobot-v1"
 N_EPISODES = 10
 CHECKPOINT_STEPS = list(range(50_000, 500_001, 50_000))
 MODELS = {
-    "DQN": (DQN, "models/dqn_cartpole_checkpoints/dqn_cartpole_{}_steps"),
-    "A2C": (A2C, "models/a2c_cartpole_checkpoints/a2c_cartpole_{}_steps"),
-    "PPO": (PPO, "models/ppo_cartpole_checkpoints/ppo_cartpole_{}_steps")
+    "DQN": (DQN, "dqn_acrobot_models/dqn_acrobot_{}_steps"),
+    "A2C": (A2C, "a2c_acrobot_models/a2c_acrobot_{}_steps"),
+    "PPO": (PPO, "ppo_acrobot_models/ppo_acrobot_{}_steps")
 }
 
-IDEAL_CONVERGENCE = 475  # Linha de referência para convergência
+IDEAL_CONVERGENCE = -100  
 
 def evaluate_model(model, env, n_episodes=10):
     rewards = []
@@ -27,10 +27,8 @@ def evaluate_model(model, env, n_episodes=10):
         total_reward = 0
         while not done:
             action, _ = model.predict(obs, deterministic=True)
-            obs, reward, done, info = env.step(action)
+            obs, reward, done, _ = env.step(action)
             total_reward += reward
-            if done:
-                break
         rewards.append(total_reward)
     return np.mean(rewards), np.std(rewards)
 
@@ -45,7 +43,7 @@ for algo_name, (algo_class, path_pattern) in MODELS.items():
 
     for step in CHECKPOINT_STEPS:
         path = path_pattern.format(step)
-        env = DummyVecEnv([lambda: gym.make(ENV_ID)])
+        env = DummyVecEnv([lambda: Monitor(gym.make(ENV_ID))])
 
         start_time = time.time()
         model = algo_class.load(path, env=env)
@@ -95,8 +93,8 @@ for algo_name in MODELS:
     ])
 comparison_df = comparison_df[ordered_columns]
 
-pd.set_option('display.max_columns', None)
-pd.set_option('display.width', 1000)
+pd.set_option('display.max_columns', None)  
+pd.set_option('display.width', 1000)        
 print("\n📊 Tabela Comparativa:")
 print(comparison_df.to_string(index=False))
 comparison_df.to_csv("tabela_comparativa.csv", index=False)
@@ -107,7 +105,7 @@ for algo_name in MODELS:
 plt.axhline(y=IDEAL_CONVERGENCE, color='r', linestyle='--', label='Convergência Ideal')
 plt.xlabel("Passos de Treinamento")
 plt.ylabel("Recompensa Média")
-plt.title("Recompensa Média por Episódio - CartPole-v1")
+plt.title("Recompensa Média por Episódio - Acrobot-v1")
 plt.legend()
 plt.grid(True)
 plt.savefig("recompensa_media.png")
@@ -118,7 +116,7 @@ for algo_name in MODELS:
     plt.plot(CHECKPOINT_STEPS, results[algo_name]["std_rewards"], label=algo_name)
 plt.xlabel("Passos de Treinamento")
 plt.ylabel("Desvio Padrão da Recompensa")
-plt.title("Estabilidade da Recompensa - CartPole-v1")
+plt.title("Estabilidade da Recompensa - Acrobot-v1")
 plt.legend()
 plt.grid(True)
 plt.savefig("estabilidade_recompensa.png")
@@ -132,7 +130,7 @@ for i, algo_name in enumerate(MODELS):
     plt.bar(bar_positions + offset, results[algo_name]["durations"], width=bar_width, label=algo_name)
 plt.xlabel("Passos de Treinamento")
 plt.ylabel("Tempo de Avaliação (s)")
-plt.title("Tempo de Avaliação por Checkpoint - CartPole-v1")
+plt.title("Tempo de Avaliação por Checkpoint - Acrobot-v1")
 plt.xticks(bar_positions, [f"{step/1000}k" for step in CHECKPOINT_STEPS])
 plt.legend()
 plt.grid(True)

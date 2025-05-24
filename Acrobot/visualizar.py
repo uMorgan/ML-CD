@@ -1,16 +1,16 @@
-import gymnasium as gym
+import gym
 import time
 from stable_baselines3 import DQN, A2C, PPO
 
 # === CONFIGURAÇÕES ===
-ALGO = "PPO"  # Opções: "DQN", "A2C", "PPO"
-ENV_ID = "CartPole-v1"
+ALGO = "DQN"  # Opções: "DQN", "A2C", "PPO"
+ENV_ID = "Acrobot-v1"
 N_EPISODES = 5
 
 CHECKPOINTS = {
-    "DQN": "models/dqn_cartpole_checkpoints/dqn_cartpole_500000_steps.zip",
-    "A2C": "models/a2c_cartpole_checkpoints/a2c_cartpole_500000_steps.zip",
-    "PPO": "models/ppo_cartpole_checkpoints/ppo_cartpole_500000_steps.zip"
+    "DQN": "dqn_acrobot_models/dqn_acrobot_500000_steps.zip",
+    "A2C": "a2c_acrobot_models/a2c_acrobot_500000_steps.zip",
+    "PPO": "ppo_acrobot_models/ppo_acrobot_500000_steps.zip"
 }
 
 CHECKPOINT = CHECKPOINTS.get(ALGO)
@@ -40,4 +40,4 @@ for ep in range(N_EPISODES):
 
     print(f"🏁 Episódio {ep + 1} finalizado com recompensa total: {total_reward:.2f}")
 
-env.close() 
+env.close()
