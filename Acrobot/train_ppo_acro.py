@@ -1,0 +1,32 @@
+import os
+import time
+from stable_baselines3 import PPO
+from stable_baselines3.common.env_util import make_vec_env
+from stable_baselines3.common.monitor import Monitor
+from stable_baselines3.common.callbacks import CheckpointCallback
+import gym
+
+ENV_ID = "Acrobot-v1"
+TOTAL_TIMESTEPS = 500_000
+SAVE_FREQ = 50_000
+SAVE_DIR = "ppo_acrobot_models"
+
+os.makedirs(SAVE_DIR, exist_ok=True)
+
+env = make_vec_env(ENV_ID, n_envs=1, wrapper_class=Monitor)
+
+model = PPO("MlpPolicy", env, verbose=1, tensorboard_log="./logs/ppo_acrobot")
+
+checkpoint_callback = CheckpointCallback(
+    save_freq=SAVE_FREQ,
+    save_path=SAVE_DIR,
+    name_prefix="ppo_acrobot"
+)
+
+start_time = time.time()
+
+model.learn(total_timesteps=TOTAL_TIMESTEPS, callback=checkpoint_callback, progress_bar=True)
+
+total_time = time.time() - start_time
+model.save(f"{SAVE_DIR}/ppo_acrobot_final")
+print(f"\nTempo total de treinamento: {total_time:.2f} segundos")

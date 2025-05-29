@@ -1,0 +1,9 @@
+# Dependências do projeto
+# Instale usando pip install -r requirements.txt
+
+gymnasium==0.29.1
+stable-baselines3==2.1.0
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+tensorboard>=2.14.0 
