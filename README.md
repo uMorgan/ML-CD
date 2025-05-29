@@ -39,8 +39,7 @@ Certifique-se de ter o Python instalado em seu sistema. Recomenda-se o uso de um
 Clone o repositório:
 
 ```bash
-git clone <URL_DO_REPOSITORIO> # Substitua <URL_DO_REPOSITORIO> pela URL do seu repositório
-cd ML-CD-main
+git clone https://github.com/uMorgan/ML-CD.git
 ```
 
 Instale as dependências listadas no arquivo `requirements.txt`:
@@ -130,7 +129,7 @@ Este repositório tem **finalidade exclusivamente acadêmica**, voltado ao estud
 
 Se tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
 
-- **Autor:** [Seu Nome Completo] (seu.email@exemplo.com)
+- **Autor:** [João Morgan De Almeida Lins Do Vale] (morgantaria965@gmail.com)
 
 ---
 
