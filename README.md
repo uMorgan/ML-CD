@@ -303,11 +303,6 @@ python resultado_final.py
 ### Gráficos de Desempenho
 
 #### 1. Recompensa Média por Episódio
-<div align="center">
-  <img src="resultados/resultados_cartpole.png" alt="Gráfico de Recompensa Média - CartPole" width="800"/>
-  <img src="resultados/resultados_acrobot.png" alt="Gráfico de Recompensa Média - Acrobot" width="800"/>
-  <img src="resultados/resultados_lunarlander.png" alt="Gráfico de Recompensa Média - LunarLander" width="800"/>
-</div>
 
 **Explicação**:
 - **CartPole**: O PPO alcançou a maior recompensa média (495.8), seguido pelo A2C (482.7) e DQN (475.2)
@@ -315,9 +310,6 @@ python resultado_final.py
 - **LunarLander**: PPO manteve o melhor desempenho (198.5), com A2C (192.7) e DQN (185.3)
 
 #### 2. Estabilidade do Desempenho
-<div align="center">
-  <img src="estabilidade_recompensa.png" alt="Gráfico de Estabilidade" width="800"/>
-</div>
 
 **Explicação**:
 - **CartPole**: PPO mostrou maior estabilidade (desvio 15.2), seguido por A2C (18.6) e DQN (25.3)
@@ -325,9 +317,6 @@ python resultado_final.py
 - **LunarLander**: PPO novamente mais estável (32.1), seguido por A2C (38.6) e DQN (45.2)
 
 #### 3. Tempo de Avaliação
-<div align="center">
-  <img src="tempo_avaliacao.png" alt="Gráfico de Tempo de Avaliação" width="800"/>
-</div>
 
 **Explicação**:
 - **CartPole**: A2C foi mais rápido (0.12s), seguido por PPO (0.14s) e DQN (0.15s)
