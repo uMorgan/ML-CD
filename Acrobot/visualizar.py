@@ -1,9 +1,8 @@
-import gym
+import gymnasium as gym
 import time
 from stable_baselines3 import DQN, A2C, PPO
 
-# === CONFIGURAÇÕES ===
-ALGO = "DQN"  # Opções: "DQN", "A2C", "PPO"
+ALGO = "DQN"
 ENV_ID = "Acrobot-v1"
 N_EPISODES = 5
 

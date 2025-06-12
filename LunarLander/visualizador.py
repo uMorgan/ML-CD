@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def visualizar_modelo(modelo_path, algoritmo, num_episodios=5):
-    env = gym.make('LunarLander-v2', render_mode='human')
+    env = gym.make('LunarLander-v3', render_mode='human')
     
     if algoritmo == 'DQN':
         modelo = DQN.load(modelo_path)
@@ -42,4 +42,4 @@ def visualizar_modelo(modelo_path, algoritmo, num_episodios=5):
     plt.show()
 
 if __name__ == "__main__":
-    visualizar_modelo('LunarLander/models/best_model', 'PPO') 
+    visualizar_modelo('LunarLander/models/ppo_lunarlander_checkpoints/best_model.zip', 'PPO') 

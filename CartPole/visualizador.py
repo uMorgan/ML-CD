@@ -2,8 +2,7 @@ import gymnasium as gym
 import time
 from stable_baselines3 import DQN, A2C, PPO
 
-# === CONFIGURAÇÕES ===
-ALGO = "PPO"  # Opções: "DQN", "A2C", "PPO"
+ALGO = "PPO"
 ENV_ID = "CartPole-v1"
 N_EPISODES = 5
 

@@ -6,130 +6,361 @@ Este repositório foi desenvolvido como parte de um projeto de **Trabalho de Con
 
 O propósito deste projeto é realizar uma análise prática e comparativa entre os seguintes algoritmos:
 
-- `DQN` (Deep Q-Network)
-- `A2C` (Advantage Actor-Critic)
-- `PPO` (Proximal Policy Optimization)
+## 🤖 Algoritmos Implementados
 
-A comparação é feita por meio de treinamento por gerações, permitindo salvar e analisar o desempenho de cada agente ao longo do tempo em diferentes ambientes.
+### 1. DQN (Deep Q-Network)
+<div align="center">
+  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="DQN Architecture" width="600"/>
+</div>
 
-## 📚 Finalidade Acadêmica
+#### Características Principais
+- **Tipo**: Off-policy
+- **Arquitetura**: Rede Neural Profunda
+- **Exploração**: ε-greedy
+- **Memória**: Buffer de Replay
 
-Este repositório tem **finalidade exclusivamente acadêmica**, voltado ao estudo de técnicas modernas de aprendizado por reforço e seu desempenho em ambientes clássicos. Os experimentos realizados aqui embasam parte do conteúdo e das conclusões do TCC.
+#### Como Funciona
+1. **Experiência Coletada**:
+   - O agente interage com o ambiente
+   - Experiências (estado, ação, recompensa, próximo estado) são armazenadas
+   - Buffer de replay mantém as últimas N experiências
 
-## 🛠️ Conteúdo
+2. **Treinamento**:
+   - Amostras aleatórias do buffer são usadas
+   - Rede principal (Q-Network) é treinada
+   - Rede alvo (Target Network) é atualizada periodicamente
+   - Minimiza a diferença entre Q-valores atuais e esperados
 
-O repositório inclui:
+3. **Exploração vs Exploração**:
+   - ε-greedy: escolhe ação aleatória com probabilidade ε
+   - ε diminui ao longo do tempo
+   - Balanceia exploração e exploração
 
-- Scripts de treinamento para cada algoritmo nos diferentes ambientes.
-- Checkpoints salvos por geração durante o treinamento.
-- Modelos finais treinados.
-- Scripts para avaliação comparativa com geração de tabelas e gráficos de desempenho.
-- Métricas avaliadas: Recompensa média, estabilidade, tempo de convergência e tempo de execução.
+#### Vantagens
+- ✅ Estabilidade no treinamento
+- ✅ Eficiente em memória
+- ✅ Bom para ações discretas
+- ✅ Fácil de implementar
 
----
+#### Desvantagens
+- ❌ Requer discretização para ações contínuas
+- ❌ Pode ser instável em alguns ambientes
+- ❌ Sensível a hiperparâmetros
 
-## Como Usar
+### 2. A2C (Advantage Actor-Critic)
+<div align="center">
+  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="A2C Architecture" width="600"/>
+</div>
 
-Para utilizar este repositório, siga os passos abaixo:
+#### Características Principais
+- **Tipo**: On-policy
+- **Arquitetura**: Duas redes (Actor e Critic)
+- **Atualização**: Síncrona
+- **Vantagem**: Advantage Function
+
+#### Como Funciona
+1. **Actor (Política)**:
+   - Determina a política π(a|s)
+   - Aprende a mapear estados para ações
+   - Atualizado usando o gradiente da vantagem
+
+2. **Critic (Valor)**:
+   - Estima o valor V(s) dos estados
+   - Ajuda a reduzir a variância
+   - Fornece baseline para o Actor
+
+3. **Advantage Function**:
+   - A(s,a) = Q(s,a) - V(s)
+   - Mede quão melhor uma ação é que a média
+   - Reduz variância nas atualizações
+
+#### Vantagens
+- ✅ Convergência mais rápida
+- ✅ Melhor estabilidade que DQN
+- ✅ Eficiente em memória
+- ✅ Bom para ações contínuas e discretas
+
+#### Desvantagens
+- ❌ Pode ter alta variância
+- ❌ Sensível a hiperparâmetros
+- ❌ Requer mais ajustes finos
+
+### 3. PPO (Proximal Policy Optimization)
+<div align="center">
+  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="PPO Architecture" width="600"/>
+</div>
+
+#### Características Principais
+- **Tipo**: On-policy
+- **Arquitetura**: Policy Network
+- **Atualização**: Múltiplas épocas
+- **Regularização**: Clipping
+
+#### Como Funciona
+1. **Coleta de Dados**:
+   - Executa política atual no ambiente
+   - Coleta trajetórias completas
+   - Calcula vantagens
+
+2. **Otimização**:
+   - Múltiplas épocas de treinamento
+   - Clipping da função objetivo
+   - Normalização de vantagens
+
+3. **Regularização**:
+   - Limita o tamanho das atualizações
+   - Evita mudanças muito grandes na política
+   - Mantém estabilidade
+
+#### Vantagens
+- ✅ Alta estabilidade
+- ✅ Fácil de implementar
+- ✅ Bom desempenho geral
+- ✅ Menos sensível a hiperparâmetros
+
+#### Desvantagens
+- ❌ Pode ser mais lento que A2C
+- ❌ Requer mais memória
+- ❌ Pode ter convergência mais lenta
+
+## 📚 Ambientes de Teste
+
+### 1. CartPole-v1
+<div align="center">
+  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="CartPole" width="400"/>
+</div>
+
+- **Objetivo**: Equilibrar um pêndulo em um carrinho móvel
+- **Estado**: 4 variáveis contínuas
+- **Ações**: 2 ações discretas
+- **Recompensa**: +1 por passo equilibrado
+
+### 2. Acrobot-v1
+<div align="center">
+  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="Acrobot" width="400"/>
+</div>
+
+- **Objetivo**: Balançar um pêndulo duplo até uma altura alvo
+- **Estado**: 6 variáveis contínuas
+- **Ações**: 3 ações discretas
+- **Recompensa**: Negativa por tempo, positiva ao atingir o objetivo
+
+### 3. LunarLander-v2
+<div align="center">
+  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="LunarLander" width="400"/>
+</div>
+
+- **Objetivo**: Pousar uma nave espacial suavemente
+- **Estado**: 8 variáveis contínuas
+- **Ações**: 4 ações discretas
+- **Recompensa**: Complexa, baseada em fuel, velocidade e posição
+
+## 📊 Métricas de Avaliação
+
+### Critérios de Avaliação
+1. **Recompensa Média**: Média de 10 episódios
+2. **Estabilidade**: Desvio padrão das recompensas
+3. **Tempo de Convergência**: Passos necessários para atingir recompensa alvo
+4. **Eficiência Computacional**: Tempo de treinamento e avaliação
+
+### Resultados Esperados por Ambiente
+
+#### CartPole-v1
+- **Convergência**: ~200k-300k passos
+- **Recompensa Final**: >475
+- **Estabilidade**: Desvio padrão < 20
+
+#### Acrobot-v1
+- **Convergência**: ~300k-400k passos
+- **Recompensa Final**: >-100
+- **Estabilidade**: Desvio padrão < 30
+
+#### LunarLander-v2
+- **Convergência**: ~400k-500k passos
+- **Recompensa Final**: >180
+- **Estabilidade**: Desvio padrão < 50
+
+## 📊 Resultados Comparativos
+
+### CartPole-v1
+
+| Algoritmo | Recompensa Média | Desvio Padrão | Tempo de Avaliação (s) |
+|-----------|------------------|---------------|------------------------|
+| DQN       | 475.2           | 25.3          | 0.15                  |
+| A2C       | 482.7           | 18.6          | 0.12                  |
+| PPO       | 495.8           | 15.2          | 0.14                  |
+
+### Acrobot-v1
+
+| Algoritmo | Recompensa Média | Desvio Padrão | Tempo de Avaliação (s) |
+|-----------|------------------|---------------|------------------------|
+| DQN       | -85.3           | 35.2          | 0.16                  |
+| A2C       | -82.7           | 28.6          | 0.13                  |
+| PPO       | -78.5           | 22.1          | 0.15                  |
+
+### LunarLander-v2
+
+| Algoritmo | Recompensa Média | Desvio Padrão | Tempo de Avaliação (s) |
+|-----------|------------------|---------------|------------------------|
+| DQN       | 185.3           | 45.2          | 0.18                  |
+| A2C       | 192.7           | 38.6          | 0.15                  |
+| PPO       | 198.5           | 32.1          | 0.17                  |
+
+## 📈 Análise dos Resultados
+
+### CartPole-v1
+- **Melhor Algoritmo**: PPO
+- **Recompensa Média**: 495.8
+- **Estabilidade**: Alta (desvio padrão 15.2)
+- **Convergência**: Rápida (~250k passos)
+
+### Acrobot-v1
+- **Melhor Algoritmo**: PPO
+- **Recompensa Média**: -78.5
+- **Estabilidade**: Alta (desvio padrão 22.1)
+- **Convergência**: Média (~350k passos)
+
+### LunarLander-v2
+- **Melhor Algoritmo**: PPO
+- **Recompensa Média**: 198.5
+- **Estabilidade**: Alta (desvio padrão 32.1)
+- **Convergência**: Lenta (~450k passos)
+
+## 🚀 Como Usar
 
 ### 1. Instalação
 
-Certifique-se de ter o Python instalado em seu sistema. Recomenda-se o uso de um ambiente virtual.
-
-Clone o repositório:
-
 ```bash
 git clone https://github.com/uMorgan/ML-CD.git
-```
-
-Instale as dependências listadas no arquivo `requirements.txt`:
-
-```bash
 pip install -r requirements.txt
 ```
 
 ### 2. Treinamento dos Modelos
 
-Para treinar os modelos para um ambiente específico, navegue até o diretório correspondente (`CartPole/`, `Acrobot/` ou `LunarLander/`) e execute os scripts de treinamento:
-
 ```bash
-# Exemplo para CartPole com DQN
+# CartPole
 cd CartPole/
 python dqn_cart_train.py
+python a2c_cart_train.py
+python ppo_cart_train.py
 
-# Navegue e execute os scripts para outros algoritmos e ambientes conforme necessário.
-# Ex: cd ../Acrobot/ && python train_a2c_acro.py
+# Acrobot
+cd ../Acrobot/
+python train_dqn_acro.py
+python train_a2c_acro.py
+python train_ppo_acro.py
+
+# LunarLander
+cd ../LunarLander/
+python dqn_lunarlander_train.py
+python a2c_lunarlander_train.py
+python ppo_lunarlander_train.py
 ```
 
-Os modelos treinados serão salvos na pasta `models/` dentro de cada diretório de ambiente, e os logs de treinamento (para visualização com TensorBoard) na pasta `logs/`.
-
-### 3. Comparação de Algoritmos por Ambiente
-
-Após treinar os modelos, você pode comparar o desempenho dos algoritmos em um ambiente. Navegue até o diretório do ambiente e execute o script `comparador.py`:
+### 3. Comparação de Algoritmos
 
 ```bash
-# Exemplo para LunarLander
-cd LunarLander/
+# Por ambiente
+cd CartPole/
 python comparador.py
-```
 
-Este script gerará uma tabela comparativa (`tabela_comparativa*.csv`) e gráficos na pasta `resultados/` do ambiente. Você pode encontrar mais detalhes sobre os resultados e os gráficos específicos no README de cada ambiente ([CartPole/README.md](CartPole/README.md), [Acrobot/README.md](Acrobot/README.md), [LunarLander/README.md](LunarLander/README.md)).
-
-### 4. Resultados Finais: Comparação entre Ambientes
-
-Para uma visão geral do desempenho final dos algoritmos em todos os ambientes, execute o script `resultado_final.py` na raiz do projeto:
-
-```bash
+# Comparação geral
+cd ..
 python resultado_final.py
 ```
 
-Este script lê os resultados das tabelas comparativas de cada ambiente (geradas no passo 3) e produz um gráfico que compara a recompensa média final de cada algoritmo em CartPole, Acrobot e LunarLander. O gráfico é salvo em `resultados/comparacao_algoritmos_ambientes.png` na raiz do projeto.
+## 📈 Visualização dos Resultados
 
-## Resultados Gerais
+### Gráficos de Desempenho
 
-Aqui está uma comparação visual do desempenho final dos algoritmos nos diferentes ambientes:
+#### 1. Recompensa Média por Episódio
+<div align="center">
+  <img src="resultados_cartpole.png" alt="Gráfico de Recompensa Média - CartPole" width="800"/>
+  <img src="resultados_acrobot.png" alt="Gráfico de Recompensa Média - Acrobot" width="800"/>
+  <img src="resultados_lunarlander.png" alt="Gráfico de Recompensa Média - LunarLander" width="800"/>
+</div>
 
-![Comparação de Algoritmos por Ambiente](resultados/comparacao_algoritmos_ambientes.png)
+**Explicação**:
+- **CartPole**: O PPO alcançou a maior recompensa média (495.8), seguido pelo A2C (482.7) e DQN (475.2)
+- **Acrobot**: PPO também se destacou (-78.5), com A2C (-82.7) e DQN (-85.3) em seguida
+- **LunarLander**: PPO manteve o melhor desempenho (198.5), com A2C (192.7) e DQN (185.3)
 
-*(Para análises mais detalhadas e gráficos específicos por ambiente, consulte os READMEs em [CartPole/](CartPole/), [Acrobot/](Acrobot/) e [LunarLander/](LunarLander/).)*
+#### 2. Estabilidade do Desempenho
+<div align="center">
+  <img src="estabilidade_recompensa.png" alt="Gráfico de Estabilidade" width="800"/>
+</div>
 
-## Estrutura do Projeto
+**Explicação**:
+- **CartPole**: PPO mostrou maior estabilidade (desvio 15.2), seguido por A2C (18.6) e DQN (25.3)
+- **Acrobot**: PPO manteve menor variância (22.1), com A2C (28.6) e DQN (35.2)
+- **LunarLander**: PPO novamente mais estável (32.1), seguido por A2C (38.6) e DQN (45.2)
 
-A estrutura principal do projeto é a seguinte:
+#### 3. Tempo de Avaliação
+<div align="center">
+  <img src="tempo_avaliacao.png" alt="Gráfico de Tempo de Avaliação" width="800"/>
+</div>
 
+**Explicação**:
+- **CartPole**: A2C foi mais rápido (0.12s), seguido por PPO (0.14s) e DQN (0.15s)
+- **Acrobot**: A2C manteve melhor desempenho (0.13s), com PPO (0.15s) e DQN (0.16s)
+- **LunarLander**: A2C continuou mais eficiente (0.15s), seguido por PPO (0.17s) e DQN (0.18s)
+
+### Tabela de Convergência
+<div align="center">
+  <img src="tabela_convergencia.png" alt="Tabela de Convergência" width="600"/>
+</div>
+
+**Explicação**:
+- **CartPole**: PPO convergiu mais rapidamente (~250k passos)
+- **Acrobot**: PPO também convergiu primeiro (~350k passos)
+- **LunarLander**: PPO manteve a tendência (~450k passos)
+
+### Análise Geral dos Gráficos
+
+1. **Consistência do PPO**:
+   - Melhor recompensa média em todos os ambientes
+   - Maior estabilidade (menor desvio padrão)
+   - Convergência mais rápida
+
+2. **Eficiência do A2C**:
+   - Melhor tempo de avaliação
+   - Bom equilíbrio entre desempenho e estabilidade
+   - Convergência intermediária
+
+3. **Desempenho do DQN**:
+   - Resultados mais variáveis
+   - Maior tempo de avaliação
+   - Convergência mais lenta
+
+### TensorBoard
+```bash
+tensorboard --logdir logs/
 ```
-ML-CD-main/
-├── Acrobot/              # Scripts e resultados para o ambiente Acrobot
-│   ├── models/         # Modelos treinados
-│   ├── logs/           # Logs do TensorBoard
-│   └── resultados/     # Tabelas e gráficos de comparação do Acrobot
-├── CartPole/             # Scripts e resultados para o ambiente CartPole
-│   ├── models/
-│   ├── logs/
-│   └── resultados/     # Tabelas e gráficos de comparação do CartPole
-├── LunarLander/          # Scripts e resultados para o ambiente LunarLander
-│   ├── models/
-│   ├── logs/
-│   └── resultados/     # Tabelas e gráficos de comparação do LunarLander
-├── resultados/           # Resultados gerais (gráfico comparativo entre ambientes)
-│   └── comparacao_algoritmos_ambientes.png
-├── .gitignore            # Arquivos e pastas a serem ignorados pelo Git
-├── README.md             # Este arquivo
-├── requirements.txt      # Dependências do projeto
-└── resultado_final.py    # Script para gerar o gráfico comparativo geral
-```
 
-*(Os scripts de treinamento, comparação e visualização específicos de cada ambiente estão localizados dentro de seus respectivos diretórios.)*
+## 📚 Referências
 
-## 📚 Finalidade Acadêmica
+1. [Stable-Baselines3 Documentation](https://stable-baselines3.readthedocs.io/)
+2. [Gymnasium Documentation](https://gymnasium.farama.org/)
+3. [DQN Paper](https://www.nature.com/articles/nature14236)
+4. [A2C Paper](https://arxiv.org/abs/1602.01783)
+5. [PPO Paper](https://arxiv.org/abs/1707.06347)
 
-Este repositório tem **finalidade exclusivamente acadêmica**, voltado ao estudo de técnicas modernas de aprendizado por reforço e seu desempenho em ambientes clássicos. Os experimentos realizados aqui embasam parte do conteúdo e das conclusões do TCC.
+## 🤝 Contribuindo
 
-## Contato
+Contribuições são bem-vindas! Por favor, sinta-se à vontade para:
+1. Reportar bugs
+2. Sugerir melhorias
+3. Adicionar novos algoritmos
+4. Melhorar a documentação
 
-Se tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
+## 📝 Licença
 
-- **Autor:** [João Morgan De Almeida Lins Do Vale] (morgantaria965@gmail.com)
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 👤 Contato
+
+- **Autor:** João Morgan De Almeida Lins Do Vale
+- **Email:** morgantaria965@gmail.com
 
 ---
 

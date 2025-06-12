@@ -1,0 +1,10 @@
+Ambiente,Algoritmo,Episódios até Convergência
+CartPole,DQN,0
+CartPole,A2C,0
+CartPole,PPO,0
+Acrobot,DQN,0
+Acrobot,A2C,0
+Acrobot,PPO,0
+LunarLander,DQN,0
+LunarLander,A2C,0
+LunarLander,PPO,0

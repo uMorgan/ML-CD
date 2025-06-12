@@ -1,0 +1,2 @@
+DQN (recompensa),A2C (recompensa),PPO (recompensa),DQN (tempo),A2C (tempo),PPO (tempo)
+185.3 ± 45.2,192.7 ± 38.6,198.5 ± 32.1,0.18s,0.15s,0.17s
