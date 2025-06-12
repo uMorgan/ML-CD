@@ -12,6 +12,12 @@ TABELAS = {
     'LunarLander': 'LunarLander/resultados/tabela_comparativa.csv',
 }
 
+TABELAS_CONVERGENCIA = {
+    'CartPole': 'CartPole/resultados/tabela_convergencia.csv',
+    'Acrobot': 'Acrobot/resultados/tabela_convergencia.csv',
+    'LunarLander': 'LunarLander/resultados/tabela_convergencia.csv',
+}
+
 RECOMPENSA_IDEAL = {
     'CartPole': 475,
     'Acrobot': -100,
@@ -21,7 +27,6 @@ RECOMPENSA_IDEAL = {
 ALGOS = ['DQN', 'A2C', 'PPO']
 
 def criar_tabela_comparativa(ambiente):
-    """Cria uma tabela comparativa com métricas padrão para o ambiente"""
     if ambiente == 'CartPole':
         dados = {
             'DQN (recompensa)': ['475.2 ± 25.3'],
@@ -54,22 +59,16 @@ def criar_tabela_comparativa(ambiente):
     return df
 
 def garantir_arquivo_csv(path, ambiente):
-    """Garante que o arquivo CSV existe e tem o formato correto"""
     if not os.path.exists(path):
         print(f"Arquivo não encontrado: {path}")
         print(f"Criando nova tabela comparativa para {ambiente}...")
-        
-        # Criar diretório se não existir
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        
-        # Criar e salvar tabela
         df = criar_tabela_comparativa(ambiente)
         df.to_csv(path, index=False)
         print(f"Tabela criada em: {path}")
         return True
     
     try:
-        # Verificar se o arquivo tem as colunas necessárias
         df = pd.read_csv(path)
         colunas_necessarias = [f'{algo} (recompensa)' for algo in ALGOS] + [f'{algo} (tempo)' for algo in ALGOS]
         
@@ -84,35 +83,24 @@ def garantir_arquivo_csv(path, ambiente):
         print(f"Erro ao verificar arquivo {path}: {str(e)}")
         return False
 
-def extrair_metricas(path, ambiente):
+def extrair_metricas(path, path_convergencia, ambiente):
     try:
         df = pd.read_csv(path)
+        df_conv = pd.read_csv(path_convergencia)
         metricas = {}
         
         for algo in ALGOS:
-            # Recompensa Média
             recompensa_valor = df.iloc[-1][f'{algo} (recompensa)']
             media = float(recompensa_valor.split('±')[0].strip())
             desvio = float(recompensa_valor.split('±')[1].strip())
             
-            # Tempo de Processamento
             tempo_valor = df.iloc[-1][f'{algo} (tempo)']
             tempo = float(tempo_valor.split('s')[0].strip())
             
-            # Estabilidade (usando desvio padrão)
             estabilidade = desvio
             
-            # Convergência (número de episódios até estabilização)
-            # Assumindo que convergência ocorre quando a recompensa média
-            # fica dentro de 5% do valor final por 10 episódios consecutivos
-            recompensas = df[f'{algo} (recompensa)'].apply(
-                lambda x: float(x.split('±')[0].strip())
-            )
-            convergencia = 0
-            for i in range(len(recompensas)-10):
-                if all(abs(recompensas[i:i+10] - media) <= 0.05 * abs(media)):
-                    convergencia = i
-                    break
+            conv_row = df_conv[df_conv['Algoritmo'] == algo].iloc[0]
+            convergencia = int(conv_row['Episódios até Convergência'])
             
             metricas[algo] = {
                 'recompensa_media': media,
@@ -123,7 +111,7 @@ def extrair_metricas(path, ambiente):
             
         return metricas
     except Exception as e:
-        print(f"Erro ao ler arquivo {path}: {str(e)}")
+        print(f"Erro ao ler arquivo {path} ou {path_convergencia}: {str(e)}")
         return None
 
 def plotar_metricas(dados, ambiente):
@@ -136,7 +124,6 @@ def plotar_metricas(dados, ambiente):
         'PPO': '#99FF99'
     }
     
-    # 1. Recompensa Média
     ax = axes[0]
     x = np.arange(len(ALGOS))
     valores = [dados[algo]['recompensa_media'] for algo in ALGOS]
@@ -157,7 +144,6 @@ def plotar_metricas(dados, ambiente):
     ax.set_ylabel('Recompensa Média')
     ax.grid(True, alpha=0.3)
     
-    # 2. Estabilidade
     ax = axes[1]
     valores = [dados[algo]['estabilidade'] for algo in ALGOS]
     barras = ax.bar(x, valores, color=[cores[algo] for algo in ALGOS])
@@ -174,7 +160,6 @@ def plotar_metricas(dados, ambiente):
     ax.set_ylabel('Desvio Padrão')
     ax.grid(True, alpha=0.3)
     
-    # 3. Tempo de Processamento
     ax = axes[2]
     valores = [dados[algo]['tempo_processamento'] for algo in ALGOS]
     barras = ax.bar(x, valores, color=[cores[algo] for algo in ALGOS])
@@ -200,7 +185,6 @@ def plotar_metricas(dados, ambiente):
     plt.close()
 
 def gerar_tabela_convergencia(dados):
-    """Gera uma tabela com os episódios até convergência para cada algoritmo"""
     linhas = []
     
     for ambiente, metricas in dados.items():
@@ -212,8 +196,6 @@ def gerar_tabela_convergencia(dados):
             })
     
     df = pd.DataFrame(linhas)
-    
-    # Salvar tabela
     df.to_csv('tabela_convergencia.csv', index=False)
     print("\nTabela de Convergência:")
     print(df.to_string(index=False))
@@ -235,12 +217,30 @@ def gerar_relatorio(dados):
                 f.write(f"  Episódios até Convergência: {metricas[algo]['convergencia']}\n")
                 f.write(f"  Tempo de Processamento: {metricas[algo]['tempo_processamento']:.2f}s\n")
 
+def criar_tabela_comparativa():
+    ambientes = ["CartPole", "Acrobot", "LunarLander"]
+    tabelas = []
+    
+    for ambiente in ambientes:
+        caminho = os.path.join(ambiente, "resultados", "tabela_convergencia.csv")
+        if os.path.exists(caminho):
+            df = pd.read_csv(caminho)
+            tabelas.append(df)
+    
+    if tabelas:
+        tabela_final = pd.concat(tabelas, ignore_index=True)
+        tabela_final.to_csv("tabela_final.csv", index=False)
+        print("\nTabela Final de Convergência:")
+        print(tabela_final.to_string(index=False))
+    else:
+        print("Nenhuma tabela de convergência encontrada.")
+
 def main():
     dados = {}
     for ambiente, path in TABELAS.items():
-        # Garantir que o arquivo existe e tem o formato correto
-        if garantir_arquivo_csv(path, ambiente):
-            metricas = extrair_metricas(path, ambiente)
+        path_conv = TABELAS_CONVERGENCIA[ambiente]
+        if garantir_arquivo_csv(path, ambiente) and os.path.exists(path_conv):
+            metricas = extrair_metricas(path, path_conv, ambiente)
             if metricas is not None:
                 dados[ambiente] = metricas
                 plotar_metricas(metricas, ambiente)
@@ -254,4 +254,4 @@ def main():
     print("\nAnálise concluída! Verifique os arquivos gerados.")
 
 if __name__ == "__main__":
-    main() 
+    criar_tabela_comparativa() 

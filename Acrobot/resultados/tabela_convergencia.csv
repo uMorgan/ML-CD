@@ -1,0 +1,4 @@
+Ambiente,Algoritmo,Episódios até Convergência
+Acrobot,DQN,300000
+Acrobot,A2C,200000
+Acrobot,PPO,100000

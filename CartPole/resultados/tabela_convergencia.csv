@@ -1,0 +1,4 @@
+Ambiente,Algoritmo,Episódios até Convergência
+CartPole,DQN,700000
+CartPole,A2C,100000
+CartPole,PPO,100000

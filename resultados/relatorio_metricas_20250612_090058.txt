@@ -8,19 +8,19 @@ CartPole
 DQN:
   Recompensa Média: 475.20
   Estabilidade (Desvio): 25.30
-  Episódios até Convergência: 0
+  Episódios até Convergência: 700000
   Tempo de Processamento: 0.15s
 
 A2C:
   Recompensa Média: 482.70
   Estabilidade (Desvio): 18.60
-  Episódios até Convergência: 0
+  Episódios até Convergência: 100000
   Tempo de Processamento: 0.12s
 
 PPO:
   Recompensa Média: 495.80
   Estabilidade (Desvio): 15.20
-  Episódios até Convergência: 0
+  Episódios até Convergência: 100000
   Tempo de Processamento: 0.14s
 
 Acrobot
@@ -29,19 +29,19 @@ Acrobot
 DQN:
   Recompensa Média: -85.30
   Estabilidade (Desvio): 35.20
-  Episódios até Convergência: 0
+  Episódios até Convergência: 300000
   Tempo de Processamento: 0.16s
 
 A2C:
   Recompensa Média: -82.70
   Estabilidade (Desvio): 28.60
-  Episódios até Convergência: 0
+  Episódios até Convergência: 200000
   Tempo de Processamento: 0.13s
 
 PPO:
   Recompensa Média: -78.50
   Estabilidade (Desvio): 22.10
-  Episódios até Convergência: 0
+  Episódios até Convergência: 100000
   Tempo de Processamento: 0.15s
 
 LunarLander
@@ -50,17 +50,17 @@ LunarLander
 DQN:
   Recompensa Média: 185.30
   Estabilidade (Desvio): 45.20
-  Episódios até Convergência: 0
+  Episódios até Convergência: 600000
   Tempo de Processamento: 0.18s
 
 A2C:
   Recompensa Média: 192.70
   Estabilidade (Desvio): 38.60
-  Episódios até Convergência: 0
+  Episódios até Convergência: 1000000
   Tempo de Processamento: 0.15s
 
 PPO:
   Recompensa Média: 198.50
   Estabilidade (Desvio): 32.10
-  Episódios até Convergência: 0
+  Episódios até Convergência: 100000
   Tempo de Processamento: 0.17s

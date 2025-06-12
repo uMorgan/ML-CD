@@ -2,6 +2,9 @@
 
 Este diretório contém os scripts e resultados para o treinamento e comparação de algoritmos de Aprendizado por Reforço no ambiente **CartPole-v1**.
 
+## 🎯 Objetivo
+O objetivo deste ambiente é equilibrar um pêndulo em um carrinho móvel, aplicando forças para a esquerda ou direita.
+
 ## 📚 Sobre o Ambiente CartPole-v1
 
 O CartPole é um problema clássico de controle onde um poste é equilibrado sobre um carrinho móvel. O objetivo é manter o poste equilibrado o maior tempo possível, movendo o carrinho para a esquerda ou direita.
@@ -43,29 +46,27 @@ O CartPole é um problema clássico de controle onde um poste é equilibrado sob
 
 ## 🚀 Como Usar
 
-### 1. Treinamento dos Modelos
-
-Para treinar cada algoritmo:
+### 1. Treinamento
 ```bash
-# Treinar DQN
 python dqn_cart_train.py
-
-# Treinar A2C
 python a2c_cart_train.py
-
-# Treinar PPO
 python ppo_cart_train.py
 ```
 
-### 2. Comparação dos Modelos
-
-Para comparar o desempenho dos algoritmos:
+### 2. Comparação
 ```bash
 python comparador.py
 ```
 
-### 3. Visualização dos Modelos
+## 📊 Visualização
 
+### Gráficos
+- [Recompensa Média](resultados/recompensa_media.png)
+- [Estabilidade](resultados/estabilidade_recompensa.png)
+- [Tempo de Avaliação](resultados/tempo_avaliacao.png)
+
+### Tabelas
+- [Tabela Comparativa](resultados/tabela_comparativa.csv)
 Para visualizar um modelo treinado:
 ```bash
 python visualizador.py

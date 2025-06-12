@@ -10,7 +10,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 1. DQN (Deep Q-Network)
 <div align="center">
-  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="DQN Architecture" width="600"/>
+  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/DQN.png" alt="DQN Architecture" width="600"/>
 </div>
 
 #### Características Principais
@@ -49,7 +49,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 2. A2C (Advantage Actor-Critic)
 <div align="center">
-  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="A2C Architecture" width="600"/>
+  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit7/A2C.png" alt="A2C Architecture" width="600"/>
 </div>
 
 #### Características Principais
@@ -87,7 +87,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 3. PPO (Proximal Policy Optimization)
 <div align="center">
-  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="PPO Architecture" width="600"/>
+  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit8/PPO.png" alt="PPO Architecture" width="600"/>
 </div>
 
 #### Características Principais
@@ -127,7 +127,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 1. CartPole-v1
 <div align="center">
-  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="CartPole" width="400"/>
+  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit1/cartpole.png" alt="CartPole" width="400"/>
 </div>
 
 - **Objetivo**: Equilibrar um pêndulo em um carrinho móvel
@@ -137,7 +137,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 2. Acrobot-v1
 <div align="center">
-  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="Acrobot" width="400"/>
+  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit1/acrobot.png" alt="Acrobot" width="400"/>
 </div>
 
 - **Objetivo**: Balançar um pêndulo duplo até uma altura alvo
@@ -147,7 +147,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 3. LunarLander-v2
 <div align="center">
-  <img src="https://miro.medium.com/max/1400/1*FhZ7qXQxXxXxXxXxXxXxXx.png" alt="LunarLander" width="400"/>
+  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit1/lunarlander.png" alt="LunarLander" width="400"/>
 </div>
 
 - **Objetivo**: Pousar uma nave espacial suavemente
@@ -190,6 +190,10 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 | A2C       | 482.7           | 18.6          | 0.12                  |
 | PPO       | 495.8           | 15.2          | 0.14                  |
 
+<div align="center">
+  <img src="resultados/resultados_cartpole.png" alt="Gráfico de Recompensa Média - CartPole" width="800"/>
+</div>
+
 ### Acrobot-v1
 
 | Algoritmo | Recompensa Média | Desvio Padrão | Tempo de Avaliação (s) |
@@ -197,6 +201,10 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 | DQN       | -85.3           | 35.2          | 0.16                  |
 | A2C       | -82.7           | 28.6          | 0.13                  |
 | PPO       | -78.5           | 22.1          | 0.15                  |
+
+<div align="center">
+  <img src="resultados/resultados_acrobot.png" alt="Gráfico de Recompensa Média - Acrobot" width="800"/>
+</div>
 
 ### LunarLander-v2
 
@@ -206,25 +214,46 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 | A2C       | 192.7           | 38.6          | 0.15                  |
 | PPO       | 198.5           | 32.1          | 0.17                  |
 
+<div align="center">
+  <img src="resultados/resultados_lunarlander.png" alt="Gráfico de Recompensa Média - LunarLander" width="800"/>
+</div>
+
 ## 📈 Análise dos Resultados
 
+### Tabela de Convergência
+<div align="center">
+
+| Ambiente | Algoritmo | Episódios até Convergência |
+|----------|-----------|---------------------------|
+| CartPole | DQN       | 700k                      |
+| CartPole | A2C       | 100k                      |
+| CartPole | PPO       | 100k                      |
+| Acrobot  | DQN       | 500k                      |
+| Acrobot  | A2C       | 300k                      |
+| Acrobot  | PPO       | 200k                      |
+| LunarLander | DQN    | 700k                      |
+| LunarLander | A2C    | 1000k                     |
+| LunarLander | PPO    | 100k                      |
+
+</div>
+
 ### CartPole-v1
-- **Melhor Algoritmo**: PPO
-- **Recompensa Média**: 495.8
-- **Estabilidade**: Alta (desvio padrão 15.2)
-- **Convergência**: Rápida (~250k passos)
+- **Melhor Algoritmo**: PPO e A2C (empate)
+- **Recompensa Média**: 495.8 (PPO) e 482.7 (A2C)
+- **Estabilidade**: Alta (desvio padrão 15.2 para PPO, 18.6 para A2C)
+- **Convergência**: Rápida (100k passos para ambos)
 
 ### Acrobot-v1
 - **Melhor Algoritmo**: PPO
 - **Recompensa Média**: -78.5
 - **Estabilidade**: Alta (desvio padrão 22.1)
-- **Convergência**: Média (~350k passos)
+- **Convergência**: Rápida (200k passos)
 
 ### LunarLander-v2
 - **Melhor Algoritmo**: PPO
 - **Recompensa Média**: 198.5
 - **Estabilidade**: Alta (desvio padrão 32.1)
-- **Convergência**: Lenta (~450k passos)
+- **Convergência**: Rápida (100k passos)
 
 ## 🚀 Como Usar
 
@@ -275,9 +304,9 @@ python resultado_final.py
 
 #### 1. Recompensa Média por Episódio
 <div align="center">
-  <img src="resultados_cartpole.png" alt="Gráfico de Recompensa Média - CartPole" width="800"/>
-  <img src="resultados_acrobot.png" alt="Gráfico de Recompensa Média - Acrobot" width="800"/>
-  <img src="resultados_lunarlander.png" alt="Gráfico de Recompensa Média - LunarLander" width="800"/>
+  <img src="resultados/resultados_cartpole.png" alt="Gráfico de Recompensa Média - CartPole" width="800"/>
+  <img src="resultados/resultados_acrobot.png" alt="Gráfico de Recompensa Média - Acrobot" width="800"/>
+  <img src="resultados/resultados_lunarlander.png" alt="Gráfico de Recompensa Média - LunarLander" width="800"/>
 </div>
 
 **Explicação**:
@@ -307,13 +336,13 @@ python resultado_final.py
 
 ### Tabela de Convergência
 <div align="center">
-  <img src="tabela_convergencia.png" alt="Tabela de Convergência" width="600"/>
+  <img src="resultados/tabela_convergencia.csv" alt="Tabela de Convergência" width="600"/>
 </div>
 
 **Explicação**:
-- **CartPole**: PPO convergiu mais rapidamente (~250k passos)
-- **Acrobot**: PPO também convergiu primeiro (~350k passos)
-- **LunarLander**: PPO manteve a tendência (~450k passos)
+- **CartPole**: PPO e A2C convergiram mais rapidamente (100k passos)
+- **Acrobot**: PPO convergiu primeiro (200k passos), seguido por A2C (300k) e DQN (500k)
+- **LunarLander**: PPO convergiu mais rápido (100k passos), seguido por DQN (700k) e A2C não convergiu
 
 ### Análise Geral dos Gráficos
 
@@ -361,6 +390,14 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 - **Autor:** João Morgan De Almeida Lins Do Vale
 - **Email:** morgantaria965@gmail.com
+
+## 🔗 PARA MELHOR VIZUALIZAR:
+
+### Ambientes
+- [CartPole-v1](CartPole/README.md) - Equilíbrio de pêndulo em carrinho móvel
+- [Acrobot-v1](Acrobot/README.md) - Balanço de pêndulo duplo
+- [LunarLander-v2](LunarLander/README.md) - Pouso suave de nave espacial
+
 
 ---
 

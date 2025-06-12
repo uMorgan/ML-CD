@@ -1,10 +1,4 @@
 Ambiente,Algoritmo,Episódios até Convergência
-CartPole,DQN,700000
-CartPole,A2C,100000
-CartPole,PPO,100000
-Acrobot,DQN,300000
-Acrobot,A2C,200000
-Acrobot,PPO,100000
 LunarLander,DQN,600000
 LunarLander,A2C,1000000
 LunarLander,PPO,100000

@@ -94,23 +94,28 @@ Modifique a variável `ALGO` no início do arquivo para escolher entre "DQN", "A
 | A2C       | -82.7           | 28.6          | 0.13                  |
 | PPO       | -78.5           | 22.1          | 0.15                  |
 
+### Convergência
+- **DQN**: 500k passos
+- **A2C**: 300k passos
+- **PPO**: 200k passos
+
 ## 🏆 Resultados Finais
 
 ### Comparação dos Algoritmos
 
 | Algoritmo | Recompensa Média | Desvio Padrão | Tempo de Avaliação | Convergência |
 |-----------|------------------|---------------|-------------------|--------------|
-| PPO       | -78.5           | 22.1          | 0.15s            | 350k        |
+| PPO       | -78.5           | 22.1          | 0.15s            | 200k        |
 | A2C       | -82.7           | 28.6          | 0.13s            | 300k        |
-| DQN       | -85.3           | 35.2          | 0.16s            | 400k        |
+| DQN       | -85.3           | 35.2          | 0.16s            | 500k        |
 
 ### Análise dos Resultados
 
-O PPO (Proximal Policy Optimization) demonstrou ser o algoritmo mais eficiente para o ambiente Acrobot, alcançando a melhor recompensa média (-78.5) e maior estabilidade (desvio padrão de 22.1). Sua convergência em 350k passos, combinada com um tempo de avaliação competitivo de 0.15s, mostra um excelente equilíbrio entre desempenho e eficiência.
+O PPO (Proximal Policy Optimization) demonstrou ser o algoritmo mais eficiente para o ambiente Acrobot, alcançando a melhor recompensa média (-78.5) e maior estabilidade (desvio padrão de 22.1). Sua convergência em 200k passos, combinada com um tempo de avaliação competitivo de 0.15s, mostra um excelente equilíbrio entre desempenho e eficiência.
 
 O A2C (Advantage Actor-Critic) apresentou um desempenho intermediário, com uma recompensa média de -82.7 e desvio padrão de 28.6. Sua principal vantagem foi a convergência mais rápida (300k passos) e o menor tempo de avaliação (0.13s).
 
-O DQN (Deep Q-Network) teve o desempenho mais modesto, com recompensa média de -85.3 e maior variabilidade (desvio padrão de 35.2). Sua convergência mais lenta (400k passos) e maior tempo de avaliação (0.16s) indicam que pode não ser a melhor escolha para este ambiente específico.
+O DQN (Deep Q-Network) teve o desempenho mais modesto, com recompensa média de -85.3 e maior variabilidade (desvio padrão de 35.2). Sua convergência mais lenta (500k passos) e maior tempo de avaliação (0.16s) indicam que pode não ser a melhor escolha para este ambiente específico.
 
 ### Comparação com Outros Ambientes
 
@@ -366,3 +371,40 @@ Contribuições são bem-vindas! Por favor, sinta-se à vontade para:
 ## 📝 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes. 
+
+## 🎯 Objetivo
+O objetivo deste ambiente é balançar um pêndulo duplo até uma altura alvo, aplicando torque na junta entre os dois elos.
+
+## 📈 Análise
+
+### Melhor Algoritmo: PPO
+- **Recompensa Média**: -78.5
+- **Estabilidade**: Alta (desvio padrão 22.1)
+- **Convergência**: Rápida (200k passos)
+
+## 🚀 Como Usar
+
+### 1. Treinamento
+```bash
+python train_dqn_acro.py
+python train_a2c_acro.py
+python train_ppo_acro.py
+```
+
+### 2. Comparação
+```bash
+python comparador.py
+```
+
+## 📊 Visualização
+
+### Gráficos
+- [Recompensa Média](resultados/recompensa_media.png)
+- [Estabilidade](resultados/estabilidade_recompensa.png)
+- [Tempo de Avaliação](resultados/tempo_avaliacao.png)
+
+### Tabelas
+- [Tabela Comparativa](resultados/tabela_comparativa.csv)
+- [Tabela de Convergência](resultados/tabela_convergencia.csv)
+
+## 🔙 [Voltar ao README Principal](../README.md) 
