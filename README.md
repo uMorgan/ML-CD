@@ -128,7 +128,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 1. CartPole-v1
 <div align="center">
-  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit1/cartpole.png" alt="CartPole" width="400"/>
+  <img src="https://www.gymlibrary.dev/_images/cart_pole.gif" alt="CartPole" width="400"/>
 </div>
 
 - **Objetivo**: Equilibrar um pêndulo em um carrinho móvel
@@ -138,7 +138,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 2. Acrobot-v1
 <div align="center">
-  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit1/acrobot.png" alt="Acrobot" width="400"/>
+  <img src="https://gymnasium.farama.org/_images/acrobot.gif" alt="Acrobot" width="400"/>
 </div>
 
 - **Objetivo**: Balançar um pêndulo duplo até uma altura alvo
@@ -148,7 +148,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 3. LunarLander-v2
 <div align="center">
-  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit1/lunarlander.png" alt="LunarLander" width="400"/>
+  <img src="https://www.gymlibrary.dev/_images/lunar_lander.gif" alt="LunarLander" width="400"/>
 </div>
 
 - **Objetivo**: Pousar uma nave espacial suavemente
