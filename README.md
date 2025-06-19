@@ -10,7 +10,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 1. DQN (Deep Q-Network)
 <div align="center">
-  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/DQN.png" alt="DQN Architecture" width="600"/>
+ <img src="https://miro.medium.com/v2/resize:fit:1153/1*emv9eFMbGODD4gnITjfwcQ.png" alt="DQN Architecture" width="600"/>
 </div>
 
 #### Características Principais
@@ -49,8 +49,9 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 2. A2C (Advantage Actor-Critic)
 <div align="center">
-  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit7/A2C.png" alt="A2C Architecture" width="600"/>
+  <img src="https://miro.medium.com/v2/resize:fit:1392/1*EiFOXH3MZ0r_a_aKLd9r8A.jpeg" alt="A2C Architecture" width="600"/>
 </div>
+
 
 #### Características Principais
 - **Tipo**: On-policy
@@ -87,7 +88,7 @@ O propósito deste projeto é realizar uma análise prática e comparativa entre
 
 ### 3. PPO (Proximal Policy Optimization)
 <div align="center">
-  <img src="https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit8/PPO.png" alt="PPO Architecture" width="600"/>
+  <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/0*6AKHU5297QgZr3Mz.png" alt="PPO Architecture" width="600"/>
 </div>
 
 #### Características Principais
